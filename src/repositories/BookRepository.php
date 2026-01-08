@@ -20,9 +20,9 @@ class BookRepository {
             $books[] = new Book(
                 $row['id'],
                 $row['title'],
-                $$row['author_name'],
+                $row['author_name'],
                 $row['price'],
-                $row['stock'],
+                $row['stock']
             );
         }
         
@@ -51,7 +51,7 @@ class BookRepository {
         }
     }
 
-        // Ajouter livre
+        // add
     public function add(Book $book) {
         $authorName = $book->getAuthorName();
         $sqlCheck = "SELECT * FROM author WHERE name = :name";
@@ -64,7 +64,7 @@ class BookRepository {
             $stmtAddAuthor->execute(['name' => $authorName]);
         }
         
-        $sql = "INSERT INTO book VALUES (:title, :author, :price, :stock)";
+        $sql = "INSERT INTO book (title, author_name, price, stock) VALUES (:title, :author, :price, :stock)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
             'title' => $book->getTitle(),

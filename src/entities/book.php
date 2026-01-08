@@ -3,7 +3,7 @@
 class Book {
     private int $id;
     private string $title;
-    private Author $authorName;
+    private string $authorName;
     private float $price;
     private int $stock;
 

@@ -1,5 +1,5 @@
 <?php
-require_once '/../src/core/database.php';
+require_once __DIR__ . '/../src/core/database.php';
 
 try {
     $pdo = Database::getConnection();
