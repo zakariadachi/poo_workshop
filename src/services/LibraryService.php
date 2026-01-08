@@ -51,7 +51,7 @@ class LibraryService {
         $book = $this->repository->findByTitle($title);
         
         if ($book) {
-            echo "Livre trouvé -> " . $book->getTitle() . " par " . $book->getAuthorName() . $price->getPrice() . "\n";
+            echo "Livre trouvé: " . " " . $book->getTitle() . " par " . $book->getAuthorName() . "\n" . "price: " . $book->getPrice() . "\n";
             return $book;
         } else {
             echo "Aucun livre trouvé avec le titre " . $title . ".\n";
