@@ -50,4 +50,29 @@ class BookRepository {
             return null;
         }
     }
+
+        // Ajouter livre
+    public function add(Book $book) {
+        $authorName = $book->getAuthorName();
+        $sqlCheck = "SELECT * FROM author WHERE name = :name";
+        $stmtCheck = $this->db->prepare($sqlCheck);
+        $stmtCheck->execute(['name' => $authorName]);
+        $authorExists = $stmtCheck->fetch();
+        if ($authorExists === false) {
+            $sqlAddAuthor = "INSERT INTO author (name) VALUES (:name)";
+            $stmtAddAuthor = $this->db->prepare($sqlAddAuthor);
+            $stmtAddAuthor->execute(['name' => $authorName]);
+        }
+        
+        $sql = "INSERT INTO book VALUES (:title, :author, :price, :stock)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            'title' => $book->getTitle(),
+            'author' => $authorName,
+            'price' => $book->getPrice(),
+            'stock' => $book->getStock()
+        ]);
+        
+        return $this->db->lastInsertId();
+    }
 }
